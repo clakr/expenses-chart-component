@@ -3,5 +3,232 @@
 @import "_preflight.css" layer(preflight);
 
 @layer main {
- 
+  :root {
+    --cream: #F8E9DD; 
+    --red: #EC755D;
+    --dark-brown: #382314;
+    --medium-brown: #92857A;
+    --cyan: #76B5BC;
+    
+
+    --card-bg: #FFFBF6;
+
+    font-family: 'Dm Sans', sans-serif;
+    background-color: var(--cream);
+  }
+
+  main {
+    min-height: 100svh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    row-gap: 1.6rem;
+
+    > * {
+      width: clamp(34rem, calc(100vw - 3.2rem), 54rem);
+    }
+  }
+
+  header {
+    background-color: var(--red);
+    color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    span {
+      order: 0;
+      font-size: 1.5rem;
+    }
+
+    b {
+      order: 2;
+      font-size: 2.4rem;
+    }
+
+    img {
+      height: 4rem;
+      width: 6rem;
+      order: 1;
+      grid-row: span 2 / span 2;
+      justify-self: flex-end;
+      align-self: center;
+    }
+  }
+
+  main > div {
+    background-color: var(--card-bg);
+    border-radius: 1rem;
+    padding: 2.4rem 2rem;
+    color: var(--dark-brown);
+    display: flex;
+    flex-direction: column;
+    row-gap: 2.4rem;
+
+    h2 {
+      font-weight: bold;
+      font-size: 2.4rem;
+    }
+
+    .chart {
+      color: var(--medium-brown);
+      display: flex;
+      column-gap: 1.2rem;
+      height: 20rem;
+      margin-top: 1.5rem;
+
+      article {
+        flex: 1 1 0px;
+        display: grid;
+        grid-template-rows: 1fr 1.6rem;
+        row-gap: 1rem;
+        
+        div {
+          background-color: var(--red);
+          border-radius: .3rem;
+          align-self: flex-end;
+          position: relative;
+          transition: background-color 300ms;
+          transition-timing-function: ease-in-out;
+
+          span {
+            opacity: 0;
+            position: absolute;
+            top: -2.75em;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--dark-brown);
+            color: white;
+            padding: .8rem;
+            font-size: 1.8rem;
+            font-weight: 500;
+            border-radius: .5rem;
+            transition: opacity 300ms;
+            transition-timing-function: inherit;
+          }
+
+          &:hover {
+            background-color: #FF9B86;
+            cursor: pointer;
+
+            span {
+              opacity: 1;
+            }
+          } 
+          
+        }
+
+        &[data-highest] div {
+          background-color: var(--cyan);
+          
+          &:hover {
+            
+            background-color: #B4E0E5;
+          }
+        }
+
+        span {
+          text-align: center;
+        }
+      }
+    }
+
+    hr {
+      border: unset;
+      outline: 1px solid var(--cream);
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(3, minmax(0, 1fr));
+
+      & > * {
+        font-size: 1.5rem;
+        line-height: auto;
+      }
+
+      span.total {
+        grid-row-start: 1;
+        color: var(--medium-brown);
+        align-self: flex-end;
+      }
+      
+      b.total {
+        grid-row-start: span 2;
+        font-size: 3rem;
+      }
+      
+      b.month {
+        grid-column-start: 2;
+        grid-row-start: 2;
+        place-self: flex-end;
+        line-height: 100%;
+      }
+      
+      span.month {
+        grid-column-start: 2;
+        grid-row-start: 3;
+        color: var(--medium-brown);
+        place-self: flex-end;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    main {
+      row-gap: 2.4rem;
+    }
+  
+    header {
+      padding: 2.5rem;
+      border-radius: 2rem;
+  
+      span {
+        font-size: 1.8rem;
+      }
+  
+      b {
+        font-size: 3.2rem;
+      }
+  
+      img {
+        height: 4.8rem;
+        width: 7.2rem;
+      }
+    }
+  
+    main > div {
+      border-radius: 2rem;
+      padding: 3.2rem 4rem 4rem;
+      row-gap: 3.2rem;
+  
+      h2 {
+        font-size: 3.2rem;
+      }
+  
+      .chart {
+        column-gap: 1.8rem;
+  
+        article {
+          grid-template-rows: 1fr 2rem;
+          
+          div {
+            border-radius: .5rem;
+          }
+        }
+      }
+  
+      .summary {
+        & > * {
+          font-size: 1.8rem;
+        }
+  
+        b.total {
+          font-size: 4.8rem;
+        }
+      }
+    }
+  }
 }
